@@ -138,8 +138,9 @@ set-entrypoint: ## Generate entrypoint.sh file
 	fi
 
 set-libs: ## Installs all the Poetry dev dependencies
-	poetry add fastapi uvicorn
-	poetry add --dev bandit toml isort black flake8 mypy autopep8
+	poetry add fastapi[standard] uvicorn
+	poetry add requests
+	poetry add --dev bandit toml isort black flake8 mypy autopep8 pytest
 
 setup: set-env set-injections set-dev-tools set-src set-dockerfile set-entrypoint set-libs ## Run all setups
 
