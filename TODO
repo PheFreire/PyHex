@@ -1,0 +1,38 @@
+Criar comando do framework PyHex: 
+
+**pyhex sub add <subdomain>:** Creates subdomain 
+
+```
+# Fazer metodo de verificacao de se 'ROOT_PATH' existe
+
+mkdir -p {ROOT_PATH}/src/infrastructure/adapters/<subdomain>/repositories
+mkdir -p {ROOT_PATH}/src/infrastructure/adapters/<subdomain>/factories
+mkdir -p {ROOT_PATH}/src/infrastructure/adapters/<subdomain>/providers
+mkdir -p {ROOT_PATH}/src/infrastructure/adapters/<subdomain>/bridges
+
+mkdir -p {ROOT_PATH}/src/domain/interfaces/<subdomain>/repositories
+mkdir -p {ROOT_PATH}/src/domain/interfaces/<subdomain>/factories
+mkdir -p {ROOT_PATH}/src/domain/interfaces/<subdomain>/providers
+mkdir -p {ROOT_PATH}/src/domain/interfaces/<subdomain>/bridges
+
+mkdir -p {ROOT_PATH}/src/domain/controllers/<subdomain>
+mkdir -p {ROOT_PATH}/src/domain/usecases/<subdomain>
+mkdir -p {ROOT_PATH}/src/domain/dtos/<subdomain>
+
+mkdir -p {ROOT_PATH}/src/entrypoints/request_model/<subdomain>
+mkdir -p {ROOT_PATH}/src/entrypoints/routes/<subdomain>
+
+[ -e {ROOT_PATH}/src/domain/interfaces/<subdomain>/repositories/__init__.py ] || touch {ROOT_PATH}/src/domain/interfaces/<subdomain>/repositories/__init__.py 
+[ -e {ROOT_PATH}/src/domain/interfaces/<subdomain>/factories/__init__.py ] || touch {ROOT_PATH}/src/domain/interfaces/<subdomain>/factories/__init__.py 
+[ -e {ROOT_PATH}/src/domain/interfaces/<subdomain>/providers/__init__.py ] || touch {ROOT_PATH}/src/domain/interfaces/<subdomain>/providers/__init__.py 
+[ -e {ROOT_PATH}/src/domain/interfaces/<subdomain>/bridges/__init__.py ] || touch {ROOT_PATH}/src/domain/interfaces/<subdomain>/bridges/__init__.py 
+
+[ -e {ROOT_PATH}/src/domain/controllers/<subdomain>/__init__.py ] || touch {ROOT_PATH}/src/domain/controllers/<subdomain>/__init__.py 
+[ -e {ROOT_PATH}/src/domain/usecases/<subdomain>/__init__.py ] || touch {ROOT_PATH}/src/domain/usecases/<subdomain>/__init__.py 
+[ -e {ROOT_PATH}/src/domain/dtos/<subdomain>/__init__.py ] || touch {ROOT_PATH}/src/domain/dtos/<subdomain>/__init__.py 
+
+[ -e {ROOT_PATH}/src/entrypoints/request_model/<subdomain>/__init__.py ] || touch {ROOT_PATH}/src/entrypoints/request_model/<subdomain>/__init__.py
+[ -e {ROOT_PATH}/src/entrypoints/routes/<subdomain>/__init__.py ] || touch {ROOT_PATH}/src/entrypoints/routes/<subdomain>/__init__.py
+
+# Fazer um algoritimo de reundo caso alguma etapa de errado
+```

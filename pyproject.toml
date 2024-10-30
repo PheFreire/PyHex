@@ -10,6 +10,7 @@ python = "^3.11"
 fastapi = "^0.115.2"
 uvicorn = {extras = ["standard"], version = "^0.23.2"}
 requests = "^2.32.3"
+toml = "^0.10.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.3.3"
@@ -18,7 +19,32 @@ isort = "^5.10.0"
 black = "^24.8.0"
 mypy = "^1.3.0"
 bandit = "^1.7.4"
-autopep8 = "^1.7.1"
+autopep8 = "^2.3.1"
+
+[tool.pytest.ini_options]
+pythonpath = "src"
+log_cli = true
+
+[tool.flake8]
+per-file-ignores = "__init__.py:F401"
+max-line-length = 70
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 70
+
+[tool.mypy]
+mypy_path = "src"
+exclude = "tests"
+explicit_package_bases = true
+
+[tool.bandit]
+skipped_tests = ["B101"]
+
+[tool.autopep8]
+ignore = "E501"
 
 [build-system]
 requires = ["poetry-core"]

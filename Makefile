@@ -10,7 +10,6 @@ help:  ## Display this help
 set-env: ## Generate .envrc file template
 	@if [ ! -f ./.envrc ]; then \
 		current=$$(pwd); \
-		echo 'export INJECTIONS_PATH="'"$$current"'/injections.toml"' > ./.envrc; \
 		echo 'export ROOT_PATH="'"$$current"'"' >> ./.envrc; \
 		echo 'export API_HOST="127.0.0.1"' >> ./.envrc; \
 		echo 'export API_PORT="8000"' >> ./.envrc; \
@@ -30,11 +29,11 @@ set-dev-tools: ## Generate setup.cfg file
 		echo 'log_cli = true\n' >> ./setup.cfg; \
 		echo '[flake8]' >> ./setup.cfg; \
 		echo 'per-file-ignores = __init__.py:F401' >> ./setup.cfg; \
-		echo 'max-line-length = 79\n' >> ./setup.cfg; \
+		echo 'max-line-length = 65\n' >> ./setup.cfg; \
 		echo '[isort]' >> ./setup.cfg; \
 		echo 'profile = black\n' >> ./setup.cfg; \
 		echo '[black]' >> ./setup.cfg; \
-		echo 'line-length = 79\n' >> ./setup.cfg; \
+		echo 'line-length = 65\n' >> ./setup.cfg; \
 		echo '[mypy]' >> ./setup.cfg; \
 		echo 'mypy_path = src' >> ./setup.cfg; \
 		echo 'exclude = tests' >> ./setup.cfg; \
@@ -46,40 +45,26 @@ set-dev-tools: ## Generate setup.cfg file
 	fi
 
 set-src: ## Generates the 'src' of the project structured in domain architecture
-	mkdir -p ./src/domain/controllers
-	mkdir -p ./src/domain/dtos
-	mkdir -p ./src/domain/usecases
-	mkdir -p ./src/domain/interfaces/bridges
-	mkdir -p ./src/domain/interfaces/factories
-	mkdir -p ./src/domain/interfaces/providers
-	mkdir -p ./src/domain/interfaces/repositories
+	mkdir -p ${ROOT_PATH}/src/infrastructure/adapters
+	mkdir -p ${ROOT_PATH}/src/domain/controllers
+	mkdir -p ${ROOT_PATH}/src/domain/interfaces
+	mkdir -p ${ROOT_PATH}/src/domain/usecases
+	mkdir -p ${ROOT_PATH}/src/domain/dtos
 
-	mkdir -p ./src/entrypoints/request_dtos
-	mkdir -p ./src/entrypoints/routes
+	mkdir -p ${ROOT_PATH}/src/entrypoints/request_model
+	mkdir -p ${ROOT_PATH}/src/entrypoints/routes
+	
+	echo '# Interfaces:' > ${ROOT_PATH}/src/__init__.py;
+	echo '# from domain.interfaces.subdomain.interface_type.script_name import InterfaceClassName \n\n' >> ${ROOT_PATH}/src/__init__.py;
+	echo '# Adapters:' >> ${ROOT_PATH}/src/__init__.py;
+	echo '# from infrastructure.adapters.subdomain.interface_type.interface_adapters.script_name import AdapterClassName\n' >> ${ROOT_PATH}/src/__init__.py;
+	echo '\n__all__ = [' >> ${ROOT_PATH}/src/__init__.py;
+	echo '	# Interfaces:' >> ${ROOT_PATH}/src/__init__.py;
+	echo '	# "InterfaceClassName",\n' >> ${ROOT_PATH}/src/__init__.py;
+	echo '	# Adapters:' >> ${ROOT_PATH}/src/__init__.py;
+	echo '	# "AdapterClassName",\n]\n' >> ${ROOT_PATH}/src/__init__.py;
 
-	mkdir -p ./src/infrastructure/adapters/bridges
-	mkdir -p ./src/infrastructure/adapters/factories
-	mkdir -p ./src/infrastructure/adapters/providers
-	mkdir -p ./src/infrastructure/adapters/repositories
-
-
-	[ -e ./src/main.py ] || touch ./src/main.py
-
-	[ -e ./src/__init__.py ] || touch ./src/domain/controllers/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/dtos/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/usecases/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/interfaces/bridges/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/interfaces/factories/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/interfaces/providers/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/domain/interfaces/repositories/__init__.py
-
-	[ -e ./src/__init__.py ] || touch ./src/entrypoints/request_dtos/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/entrypoints/routes/__init__.py
-
-	[ -e ./src/__init__.py ] || touch ./src/infrastructure/adapters/bridges/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/infrastructure/adapters/factories/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/infrastructure/adapters/providers/__init__.py
-	[ -e ./src/__init__.py ] || touch ./src/infrastructure/adapters/repositories/__init__.py
+	[ -e ${ROOT_PATH}/src/main.py ] || touch ${ROOT_PATH}/src/main.py
 
 set-dockerfile: ## Generate Dockerfile
 	@if [ ! -f ./Dockerfile ]; then \
