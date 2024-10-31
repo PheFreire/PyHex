@@ -36,3 +36,8 @@ mkdir -p {ROOT_PATH}/src/entrypoints/routes/<subdomain>
 
 # Fazer um algoritimo de reundo caso alguma etapa de errado
 ```
+
+**pyhex import <absolut_dir_path>:** Imports into a 'injections.py' file all classes with dependency injections decorators
+```
+# Create function with the imports 'load_injections' inside the 'injections.py'
+```

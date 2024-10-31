@@ -53,16 +53,6 @@ set-src: ## Generates the 'src' of the project structured in domain architecture
 
 	mkdir -p ${ROOT_PATH}/src/entrypoints/request_model
 	mkdir -p ${ROOT_PATH}/src/entrypoints/routes
-	
-	echo '# Interfaces:' > ${ROOT_PATH}/src/__init__.py;
-	echo '# from domain.interfaces.subdomain.interface_type.script_name import InterfaceClassName \n\n' >> ${ROOT_PATH}/src/__init__.py;
-	echo '# Adapters:' >> ${ROOT_PATH}/src/__init__.py;
-	echo '# from infrastructure.adapters.subdomain.interface_type.interface_adapters.script_name import AdapterClassName\n' >> ${ROOT_PATH}/src/__init__.py;
-	echo '\n__all__ = [' >> ${ROOT_PATH}/src/__init__.py;
-	echo '	# Interfaces:' >> ${ROOT_PATH}/src/__init__.py;
-	echo '	# "InterfaceClassName",\n' >> ${ROOT_PATH}/src/__init__.py;
-	echo '	# Adapters:' >> ${ROOT_PATH}/src/__init__.py;
-	echo '	# "AdapterClassName",\n]\n' >> ${ROOT_PATH}/src/__init__.py;
 
 	[ -e ${ROOT_PATH}/src/main.py ] || touch ${ROOT_PATH}/src/main.py
 
